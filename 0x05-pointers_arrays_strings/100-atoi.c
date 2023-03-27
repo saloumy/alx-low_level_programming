@@ -1,18 +1,35 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
- * main - check the code
- *
- * Return: Always 0.
+ * _atoi - converts a string to an integer.
+ * @s: input string.
+ * Return: integer.
  */
-int main(void)
+int _atoi(char *s)
 {
-	char s1[98];
-	char *ptr;
+	unsigned int count = 0, size = 0, oi = 0, pn = 1, m = 1, i;
 
-	ptr = _strcpy(s1, "First, Solve the problem. Then, write the code\n");
-	printf("%s", s1);
-	printf("%s", ptr);
-	return (0);
+	while (*(s + count) != '\0')
+	{
+		if (size > 0 && (*(s + count) < '0' || *(s + count) > '9'))
+			break;
+
+		if (*(s + count) == '-')
+			pn *= -1;
+
+		if ((*(s + count) >= '0') && (*(s + count) <= '9'))
+		{
+			if (size > 0)
+				m *= 10;
+			size++;
+		}
+		count++;
+	}
+
+	for (i = count - size; i < count; i++)
+	{
+		oi = oi + ((*(s + i) - 48) * m);
+		m /= 10;
+	}
+	return (oi * pn);
 }
